@@ -1,0 +1,69 @@
+{namespace zeitschrift=Tx_HuubZeitschriftendienst_ViewHelpers}
+
+
+
+
+
+
+<div class="tx-huubzeitschriftendienst" style="width:500px; float:left; margin-top:10px;" >
+    <div style="width:500px; background:#cccccc; padding:3px;">
+        <f:render section="obereZeile" />
+    </div>
+
+
+    
+    <div style="padding:5px">
+        <f:translate key="gefundene_zeitschriften" /> <f:count subject="{zeitschriften}" />
+    </div>
+
+    <f:if condition="{zeitschriften}">
+        <f:then>
+    
+            <f:widget.paginate objects="{zeitschriften}" as="paginatedZeitschriften" configuration="{itemsPerPage: 50, insertAbove: 1, insertBelow: 1}">
+                <table width="500" border="0" cellspacing="2">
+                    <f:for each="{paginatedZeitschriften}" as="zeitschrift">
+                        <tr>
+                            <td valign="top"><a class="ohne_pfeil" target="_blank" href="{zeitschrift:link(zeitschrift: zeitschrift.zeitschrift, zdbid: zeitschrift.zdbid)}">{zeitschrift.zeitschrift}</a></td>
+                            <td valign="top"><div style="background: url('{f:uri.resource(path: 'Icons/iconRotRot.gif')}'); background-position:right; max-width:37px; height:16px; overflow:hidden; direction:rtl"> <img  width="54px" height="16px" src="{zeitschrift:bild(zeitschrift: zeitschrift.zeitschrift, zdbid: zeitschrift.zdbid)}" border="0" /></div></td>
+                        </tr>
+                    </f:for>
+                </table>
+            </f:widget.paginate>
+        </f:then>
+
+    </f:if>
+    
+
+</div>
+
+<div style="width:190px; padding-left:20px; float:right; margin-top:10px;">
+    
+    <h3 style="background:#cccccc; padding:3px; margin-top:0px;"><f:translate key="legende" /></h3>
+    <table border="0">
+
+        <tr><td><f:image src="{f:uri.resource(path: 'Icons/iconPfeilGruen.gif')}" alt="Pfeil grün"/></td><td><f:translate key="pfeil_gruen" /></td></tr>
+        <tr><td><f:image src="{f:uri.resource(path: 'Icons/iconPfeilGruenTeilweise.gif')}" alt="Pfeil grün"/></td><td><f:translate key="pfeil_gruen_teilweise" /></td></tr>
+        <tr><td><f:image src="{f:uri.resource(path: 'Icons/iconPfeilGelb.gif')}" alt="Pfeil gelb" /></td><td><f:translate key="pfeil_gelb" /></td></tr>
+        <tr><td><f:image src="{f:uri.resource(path: 'Icons/iconPfeilGelbTeilweise.gif')}" alt="Pfeil gelb" /></td><td><f:translate key="pfeil_gelb_teilweise" /></td></tr>
+        <tr><td><f:image src="{f:uri.resource(path: 'Icons/iconPfeilRot.gif')}" alt="Pfeil rot" /></td><td><f:translate key="pfeil_rot" /></td></tr>
+        <!--<tr><td><f:image src="{f:uri.resource(path: 'Icons/iconBlattGruen.gif')}" alt="Blatt grün" /></td><td><f:translate key="blatt_gruen" /></td></tr> -->
+        <tr><td><f:image src="{f:uri.resource(path: 'Icons/iconBlattGelb.gif')}" alt="Blatt gelb" /></td><td><f:translate key="blatt_gelb" /></td></tr>
+        <tr><td><f:image src="{f:uri.resource(path: 'Icons/iconBlattRot.gif')}" alt="Blatt rot" /></td><td><f:translate key="blatt_rot" /></td></tr>
+    </table>
+
+    <h3 style="background:#cccccc; padding:3px;"><f:translate key="suchen_nach" /></h3>
+    <f:form action="search">
+        <f:form.textfield name="searchString" size="15" id="searchString" />
+        <f:widget.autocomplete for="searchString" objects="{alleZeitschriften}" searchProperty="zeitschrift" />
+      
+        <f:form.submit value="ok" />
+    </f:form>
+
+    <h3 style="background:#cccccc; padding:3px;"><f:translate key="in_zusammenarbeit_mit" /></h3>                
+    <f:link.external uri="http://www.zeitschriftendatenbank.de/services/journals-online-print.html" target="_blank">
+        Journals Online & Print
+    </f:link.external>
+
+
+</div>
+

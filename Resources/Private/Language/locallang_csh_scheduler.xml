@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Content of ZeitschriftenTask</description>
+        <type>CSH</type>
+        <csh_table>_MOD_tools_txschedulerM1</csh_table>
+        <fileId>EXT:huub_zeitschriftendienst/Resources/Private/Language/locallang_csh_scheduler.xml</fileId>
+        <labelContext type="array"></labelContext>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index="suchStringEzb.alttitle">Suchstring EZB</label>
+            <label index="suchStringEzb.description">Hier den Notationscode für das Fachgebiet angeben.</label>
+            <label index="suchStringEzb.details">
+                Notationscode der EZB erfährt man über diese Seite: 
+                http://rzblx1.uni-regensburg.de/ezeit/fl.phtml?bibid=AAAAA&amp;colors=7&amp;lang=de 
+                Einfach aus dem Link den Notationscode rauskopieren. Beispiele:
+                Evifa: Ethnologie (Volks- und Völkerkunde): notation=LA-LC
+                HSW: Wissenschaftskunde, Forschung, Hochschul-, Museumswesen: $notation=AK-AL
+            </label>
+            
+            <label index="suchStringZdb.alttitle">Suchstring ZDB</label>
+            <label index="suchStringZdb.description">Hier den Querycode für das Fachgebiet angeben.</label>
+            <label index="suchStringZdb.details">
+                Querycode der EZB erfährt man über diese Seite:
+                http://dispatch.opac.d-nb.de/DB=1.1/SSG
+                Einfach die Nummer in das Feld eintragen. Beispiele:
+                Evifa: Ethnologie (Volks- und Völkerkunde): ssg=10
+                HSW: Hochschulwesen, Organisation der Wissenschaften und ihrer Einrichtungen: ssg=24,2
+            </label>
+        </languageKey>
+    </data>
+</T3locallang>

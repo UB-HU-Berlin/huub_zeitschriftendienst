@@ -1,0 +1,30 @@
+<f:if condition="{configuration.insertAbove}">
+    <f:render section="paginator" arguments="{pagination: pagination}" />
+</f:if>
+
+<f:renderChildren arguments="{contentArguments}" />
+
+<f:if condition="{configuration.insertBelow}">
+    <f:render section="paginator" arguments="{pagination: pagination}" />
+</f:if>
+
+<f:section name="paginator">
+<span style="color: #FFF; background-color: #A74903;">Seite</span> &nbsp;&nbsp; 
+<f:for each="{pagination.pages}" as="page">
+    <f:if condition="{page.isCurrent}">
+        <f:then>
+            <span style="color: #A74903; font-size: 11px;">{page.number}</span> 
+        </f:then>
+        <f:else>
+            <f:widget.link arguments="{currentPage: page.number}" class="ohne_pfeil">{page.number}</f:widget.link>     
+        </f:else>
+    </f:if>
+    <f:if condition="{page.number} != {pagination.numberOfPages}">
+        <f:then>
+            &nbsp;|&nbsp;
+        </f:then>
+    </f:if>
+      
+</f:for>
+</f:section>
+

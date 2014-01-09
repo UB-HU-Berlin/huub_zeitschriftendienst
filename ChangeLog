@@ -1,0 +1,15 @@
+2013-07-10 Ronald Neumann  <ronald-neumann@web.de>
+    * Version 1.2.0
+    * Feature: Task ist jetzt ein CommandController. Damit ist extbase in vollem Umfang nutzbar.
+
+2012-07-16 Ronald Neumann  <ronald-neumann@web.de>
+    * Version 1.1.0
+    * Feature: Task erweitert, sodass EZB und ZDB Suchstring eingegben werden können
+
+2011-09-28 Ronald Neumann  <ronald-neumann@web.de>
+    * Version 1.0.0
+    * Feature: Task implementiert, sodass Zeitschriften automatisch (über den Scheduler) geholt werden
+
+2011-06-28 Ronald Neumann  <ronald-neumann@web.de>
+
+    * initial code generated with kickstarter

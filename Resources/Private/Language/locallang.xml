@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Strings for the 'huub_zeitschriftendienst' extension </description>
+	</meta>
+	<data type="array">
+		<languageKey index="en" type="array">
+			<label index="pfeil_gruen">free access to some issues of online journal</label>
+			<label index="pfeil_gruen_teilweise">free access to online journal</label>
+			<label index="pfeil_gelb">free access to online journal for your institution</label>
+			<label index="pfeil_gelb_teilweise">free access to some issues of online journal for your institution</label>
+			<label index="pfeil_rot">on access to online journal for your institution (or online journal does not exists)</label>
+			<label index="blatt_gelb">print journal available in your institution</label>
+			<label index="blatt_rot">print journal not available in your institution (or print journal does not exists)</label>
+			<label index="in_zusammenarbeit_mit">In cooperation with</label>
+			<label index="suchen_nach">Search for</label>
+			<label index="legende">Legend</label>
+			<label index="gefundene_zeitschriften">Found jounrnals:</label>
+			<label index="suchergebnisse_fuer">Results for:</label>
+			<label index="zur_gesamtliste">Back to list</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="pfeil_gruen">Online-Zeitschrift frei zugänglich</label>
+			<label index="pfeil_gruen_teilweise">Online-Zeitschrift teilweise (einige Jahrgänge) frei zugänglich</label>
+			<label index="pfeil_gelb">Online-Zeitschrift für Ihre Institution frei zugänglich</label>
+			<label index="pfeil_gelb_teilweise">Online-Zeitschrift teilweise (einige Jahrgänge) für Ihre Institution frei zugänglich</label>
+			<label index="pfeil_rot">Online-Zeitschrift für Ihre Institution nicht zugänglich (oder existiert nicht)</label>
+			<label index="blatt_gelb">Druckausgabe in Ihrer Institution verfügbar</label>
+			<label index="blatt_rot">Druckausgabe in Ihrer Institution nicht verfügbar (oder existiert nicht)</label>
+			<label index="in_zusammenarbeit_mit">In Zusammenarbeit mit</label>
+			<label index="suchen_nach">Suchen nach</label>
+			<label index="legende">Legende</label>
+			<label index="gefundene_zeitschriften">Gefundene Zeitschriften:</label>
+			<label index="suchergebnisse_fuer">Suchergebnisse für:</label>
+			<label index="zur_gesamtliste">Zur Gesamtliste</label>
+		</languageKey>
+	</data>
+</T3locallang>

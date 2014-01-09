@@ -1,0 +1,17 @@
+plugin.tx_huubzeitschriftendienst.view.widget.Tx_Fluid_ViewHelpers_Widget_PaginateViewHelper.templateRootPath = EXT:huub_zeitschriftendienst/Resources/Private/Templates/
+
+
+page.headerData.40 = TEXT
+page.headerData.40.value (
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/themes/base/jquery-ui.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="http://static.jquery.com/ui/css/demo-docs-theme/ui.theme.css" type="text/css" media="all" />
+)
+
+
+page.includeCSS.tx_huubzeitschriftendienst = EXT:huub_zeitschriftendienst/Resources/Public/Css/HuubZeitschriftendienst.css
+
+
+module.tx_huubzeitschriftendienst.persistence.storagePid = 0
+
