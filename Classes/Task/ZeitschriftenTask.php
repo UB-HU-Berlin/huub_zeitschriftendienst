@@ -4,7 +4,6 @@ class Tx_HuubZeitschriftendienst_Task_ZeitschriftenTask extends tx_scheduler_Tas
 {
 
     private function getZdbidFromEzb($jourid) {
-        require_once("/var/www/classes/xmlfile.php");
 
         $url = "http://rzblx1.uni-regensburg.de/ezeit/detail.phtml?client_ip=".$_SERVER['REMOTE_ADDR'] . "&xmloutput=1&jour_id=" . $jourid;  
         $xmlString = file_get_contents($url);
@@ -21,8 +20,8 @@ class Tx_HuubZeitschriftendienst_Task_ZeitschriftenTask extends tx_scheduler_Tas
     public function execute() 
     {
 
-        //$db= mysql_connect('localhost', 'evifa', 'ethno23');
-        $db= mysql_connect('localhost', 'admin', 'e2v*i4f=a8');
+        
+        $db= mysql_connect(TYPO3_db_host, TYPO3_db_username, TYPO3_db_password, TYPO3_db);
 
         if(!$db) {
             echo('Fehler beim Datenbankconnect: ' . mysql_error() . '<br>');
@@ -32,9 +31,7 @@ class Tx_HuubZeitschriftendienst_Task_ZeitschriftenTask extends tx_scheduler_Tas
 
 
 
-        require_once("/var/www/classes/xmlfile.php");
-
-        $result = mysql_query('TRUNCATE TABLE t3_evifa.tx_huubzeitschriftendienst_domain_model_zeitschrift', $db);
+        $result = mysql_query('TRUNCATE TABLE '.TYPO3_db.'.tx_huubzeitschriftendienst_domain_model_zeitschrift', $db);
 
         if(!$result) {
             tx_scheduler::log('Fehler beim Leeren: ' . mysql_error() . '<br>');
@@ -47,9 +44,6 @@ class Tx_HuubZeitschriftendienst_Task_ZeitschriftenTask extends tx_scheduler_Tas
 
 ////EZB
 
-        //durchlauf (EZB) geht wie folgt: 
-        //Wir starten, Wenn next_fifity gesetzt, dann Aufruf mit SC = SC un SINDEX += 50.
-        //Wenn next_fifty nicht gesetzt, dann Aufruf mit SC = LC und Sindex = 0,
 
         //baseurl
         $baseurl = "http://rzblx1.uni-regensburg.de/ezeit/fl.phtml?client_ip=".$_SERVER['REMOTE_ADDR'] . "&xmloutput=1&notation=" . $this->suchStringEzb;
@@ -83,20 +77,13 @@ class Tx_HuubZeitschriftendienst_Task_ZeitschriftenTask extends tx_scheduler_Tas
                     return FALSE;
                 }
         
-                $result = mysql_query("INSERT INTO t3_evifa.tx_huubzeitschriftendienst_domain_model_zeitschrift(pid, tstamp, crdate, zeitschrift, zdbid) VALUES ('0', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), '$titel', '$zdbid')", $db);
+                $result = mysql_query("INSERT INTO ".TYPO3_db.".tx_huubzeitschriftendienst_domain_model_zeitschrift(pid, tstamp, crdate, zeitschrift, zdbid) VALUES ('0', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), '$titel', '$zdbid')", $db);
                 if(!$result) {
                     //tx_scheduler::log('Fehler beim EZB-Insert: ' . mysql_error() . '<br>');
                     //return FALSE;
             
                 } //if
-        //$href=
-        //echo("<a href=\"$href\" target=\"_blank\">");
-        //echo((string) $VALUE->title);
-        //$src = "http://services.d-nb.de/fize-service/gvr/icon?sid=vifa:evifa&genre=journal&pid=" . urlencode("client_ip=" . $_SERVER['REMOTE_ADDR'] . "&zdbid=" . getZdbidFromEzb($VALUE["jourid"]));
-        //echo("<img src=\"$src\">");
-        //echo("</a>";
-        //echo("<br>");
-        //$i++; 
+ 
             } //foreach
     
             $sindex_temp = (string) $xmlString->ezb_alphabetical_list->next_fifty["sindex"];
@@ -127,10 +114,7 @@ class Tx_HuubZeitschriftendienst_Task_ZeitschriftenTask extends tx_scheduler_Tas
 
 
 //ZDB
-//changed from "http://services.d-nb.de/sru/zdb?version=1.1&operation=searchRetrieve&query=ssg%3D" . $this->suchStringZdb . "&maximumRecords=10&recordSchema=MABxml-1"; 
-//to
-//"http://services.dnb.de/sru/zdb?version=1.1&operation=searchRetrieve&query=ssg%3D" . $this->suchStringZdb . "&maximumRecords=10&recordSchema=MARC21-xml"; 
-//23.11.2013 
+
         $baseurl = "http://services.d-nb.de/sru/zdb?version=1.1&operation=searchRetrieve&query=ssg%3D" . $this->suchStringZdb . "&maximumRecords=10&recordSchema=MARC21-xml";
         $nextRecord = "1";
         do {
@@ -140,14 +124,7 @@ class Tx_HuubZeitschriftendienst_Task_ZeitschriftenTask extends tx_scheduler_Tas
             if ($xmlString === FALSE) {
                 return FALSE;
             }
-    //$xmlFile=explode("\n",$xmlString);
-    //print_r($xmlString);
-    
-    //<feld nr="025" ind="z">2595035-6</feld>
-    //$pattern = '/(.*)(<feld nr=\"025\" ind=\"z\">)(\d*-\d)(<\/feld>)(.*)/';
-    //$replace = '$3';
-    //echo("<br><br>" . preg_replace($pattern, $replace, $xmlString));
-    
+
 
     
             $xmlString = simplexml_load_string($xmlString);
@@ -179,12 +156,11 @@ class Tx_HuubZeitschriftendienst_Task_ZeitschriftenTask extends tx_scheduler_Tas
             
             
                 } //foreach
-                //echo("ZDB-ID: " . $zdbId . "<br>");
-                //echo("Titel: " . $titel . "<br>");      
+        
 //23.11.2013
-                $query = "INSERT INTO t3_evifa.tx_huubzeitschriftendienst_domain_model_zeitschrift(pid, tstamp, crdate, zeitschrift, zdbid) VALUES ('0', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), '".$titel."', '".$zdbId."')";
+                $query = "INSERT INTO ".TYPO3_db.".tx_huubzeitschriftendienst_domain_model_zeitschrift(pid, tstamp, crdate, zeitschrift, zdbid) VALUES ('0', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), '".$titel."', '".$zdbId."')";
                 $result = mysql_query($query, $db);
-                //echo("Query: " . $query . "<br>");  
+
                 if(!$result) {
                     //tx_scheduler::log('Fehler beim ZDB-Insert: ' . mysql_error() . '<br>');
                     //return FALSE;
@@ -194,13 +170,10 @@ class Tx_HuubZeitschriftendienst_Task_ZeitschriftenTask extends tx_scheduler_Tas
                 }
             } //foreach
     
-    
-            //print_r($xmlString);
+
     
             $maxRecord = (integer) $xmlString->numberOfRecords;
             $nextRecord = (integer) $xmlString->nextRecordPosition;
-    
-    //echo($nextRecord . " < " . $maxRecord);
     
     
 
