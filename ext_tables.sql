@@ -16,6 +16,5 @@ CREATE TABLE tx_huubzeitschriftendienst_domain_model_zeitschrift (
 	zdbid varchar(255) DEFAULT '' NOT NULL,
 	
 	PRIMARY KEY (uid),
-	KEY parent (pid),
-	UNIQUE(zeitschrift)
+	KEY parent (pid)
 );
